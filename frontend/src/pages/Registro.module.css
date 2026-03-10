@@ -1,0 +1,88 @@
+/* Registro.module.css - Versión Responsive */
+
+.contenedor {
+    width: 90%;            /* Ocupa casi todo el ancho en celulares */
+    max-width: 450px;      /* Pero no se estira de más en PC */
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    font-family: sans-serif;
+}
+
+.titulo {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #d4af37;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.5rem;      /* Tamaño de fuente ajustable */
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.campo label {
+    font-size: 0.85rem;
+    color: #b3b3b3;
+}
+
+/* Ajuste para que los inputs sean fáciles de tocar en móvil */
+.campo input, 
+.campo select {
+    padding: 14px;          /* Más alto para dedos grandes */
+    border: 1px solid #333;
+    border-radius: 8px;
+    background-color: #2a2a2a;
+    color: #fff;
+    font-size: 16px;        /* 16px evita que el iPhone haga zoom automático al escribir */
+    width: 100%;            /* Asegura que no se salgan del contenedor */
+    box-sizing: border-box; /* Crucial para que el padding no rompa el ancho */
+}
+
+.campo input:focus {
+    outline: none;
+    border-color: #d4af37;
+}
+
+.botonGuardar {
+    margin-top: 15px;
+    padding: 16px;          /* Botón grande para pulgares */
+    background-color: #d4af37;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+    -webkit-tap-highlight-color: transparent; /* Quita el cuadro azul raro en móviles */
+}
+
+.botonGuardar:active {
+    background-color: #f1c40f;
+    transform: scale(0.96); /* Efecto visual de pulsado */
+}
+
+/* Media Query para pantallas muy pequeñas */
+@media (max-width: 380px) {
+    .contenedor {
+        padding: 15px;
+        width: 95%;
+    }
+    .titulo {
+        font-size: 1.2rem;
+    }
+}
