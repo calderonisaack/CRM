@@ -1,0 +1,6 @@
+{
+  "schema": "prisma/schema.prisma",
+  "datasource": {
+    "url": "postgresql://postgres:23062004Ki@localhost:5432/barber_db?schema=public"
+  }
+}
