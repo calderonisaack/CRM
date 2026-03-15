@@ -1,0 +1,94 @@
+/* Booking.css - CORREGIDO PARA SUBIR EL CUADRO */
+.booking-page {
+  background-color: #0C0C0F;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  /* CAMBIO: align-items a flex-start para que no se centre al medio y "se entierre" */
+  align-items: flex-start; 
+  /* CAMBIO: Ajustamos el padding-top para controlar qué tan arriba lo quieres (60px es ideal para que respire bajo el navbar) */
+  padding: 60px 15px 40px 15px; 
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.booking-card {
+  background-color: #16161a;
+  width: 100%;
+  max-width: 700px;
+  padding: 40px 30px;
+  border: 1px solid #222;
+  box-sizing: border-box;
+  /* CAMBIO: Un pequeño margen extra arriba para asegurar la posición */
+  margin-top: 20px; 
+}
+
+.booking-title {
+  text-align: center;
+  font-size: 1.8rem;
+  letter-spacing: 4px;
+  margin-bottom: 5px;
+  font-weight: 900;
+  color: #fff;
+}
+
+.form-grid {
+  display: grid;
+  /* Esto ya lo tenías bien para el responsive */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.input-field {
+  background-color: #0c0c0f;
+  color: #fff;
+  padding: 14px;
+  border: 1px solid #333;
+  font-size: 16px; 
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input-field:focus {
+  border-color: #D4AF37;
+}
+
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.time-slot {
+  padding: 12px;
+  background: transparent;
+  border: 1px solid #333;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.time-slot.selected {
+  background-color: #D4AF37;
+  color: #000;
+  border-color: #D4AF37;
+}
+
+/* Responsividad para móviles pequeños */
+@media (max-width: 480px) {
+  .booking-page {
+    padding-top: 40px; /* Sube un poco más en móviles */
+  }
+  .booking-card {
+    padding: 25px 15px;
+    border: none; 
+  }
+  .time-grid {
+    grid-template-columns: repeat(3, 1fr); 
+  }
+}
