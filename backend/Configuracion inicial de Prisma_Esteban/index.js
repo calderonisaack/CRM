@@ -158,6 +158,57 @@ app.get('/barberos', protegerRuta, async (req, res) => {
     res.status(500).json({ error: "Error de DB" });
   }
 });
+// TU FASE 3: VER EL INVENTARIO
+app.get('/api/inventario', protegerRuta, async (req, res) => {
+  try {
+    const productos = await prisma.product.findMany();
+    res.json(productos);
+  } catch (error) {
+    console.error("Error al cargar inventario:", error);
+    res.status(500).json({ error: "Error al cargar el inventario" });
+  }
+});
+
+// TU FASE 3: REGISTRAR VENTA Y DESCONTAR STOCK
+app.post('/api/ventas', protegerRuta, async (req, res) => {
+  const { productId, price } = req.body;
+
+  try {
+    // 1. Buscamos el producto para ver si hay stock suficiente
+    const producto = await prisma.product.findUnique({
+      where: { id: parseInt(productId) }
+    });
+
+    if (!producto || producto.stock <= 0) {
+      return res.status(400).json({ error: "No hay stock disponible de este producto." });
+    }
+
+    // 2. Registramos la venta en la tabla (ahora con el totalPrice)
+    const nuevaVenta = await prisma.sale.create({
+      data: {
+        productId: parseInt(productId),
+        quantity: 1, // Asumimos que vendes 1 unidad a la vez
+        totalPrice: parseFloat(price), // ¡Aquí agregamos el campo que pedía Prisma!
+      }
+    });
+
+    // 3. Le restamos 1 al stock en la tabla de Productos
+    const productoActualizado = await prisma.product.update({
+      where: { id: parseInt(productId) },
+      data: { stock: { decrement: 1 } } // Prisma resta 1 automáticamente
+    });
+
+    res.status(201).json({ 
+      mensaje: "¡Venta registrada con éxito!", 
+      venta: nuevaVenta,
+      stockRestante: productoActualizado.stock
+    });
+
+  } catch (error) {
+    console.error("Error al registrar la venta:", error);
+    res.status(500).json({ error: "Hubo un error interno al procesar la venta." });
+  }
+});
 
 // --- INICIAR SERVIDOR ---
 app.listen(PORT, () => {
