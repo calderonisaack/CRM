@@ -26,6 +26,7 @@ model Service {
 model Appointment {
   id          Int      @id @default(autoincrement())
   clientName  String
+  clientPhone String   // <--- AÑADE ESTA LÍNEA AQUÍ
   date        DateTime 
   status      String   @default("SCHEDULED") 
   
